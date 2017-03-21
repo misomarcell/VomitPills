@@ -45,11 +45,12 @@ public class Messages extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String message = request.getParameter("message");      
-        System.out.println(message);
+		String message = request.getParameter("message");    
+		String name = request.getParameter("name"); 
+        System.out.println(name + ": " + message);
         
         SimpleDateFormat timeStamp = new SimpleDateFormat("MM-dd HH:mm:ss");
-        messages.add("[" + timeStamp.format(new Date()) + "] " + message);
+        messages.add("[" + timeStamp.format(new Date()) + "] " + name + ": " + message);
         
         response.sendRedirect("./feedback");
 	}

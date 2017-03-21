@@ -174,14 +174,7 @@ p {
 .send-message {
 	margin: 10px;
 	overflow:hidden;
-}
-
-.message-input-container {
-	float:left;
-	display:inline-table;
-	width:90px;
-	height:60px;
-	line-height:24px;	
+	line-height:30px;
 }
 
 .variants-table{
