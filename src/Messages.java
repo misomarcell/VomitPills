@@ -35,15 +35,20 @@ public class Messages extends HttpServlet {
 	   		
 		String formedMessages = "";    
 	    
+		
+		//Check if there is any messages
 		if (messages.size() < 1)
 		{
 			formedMessages = "There is no message yet."; 
 		}
 		
+		
+		//Print previous messages
 	    for (String message : messages) {
 	    	formedMessages +=  message + "<br />";
 		}
 	    
+	    //Set values
 		request.setAttribute("message", formedMessages);
 		request.setAttribute("name", getCookie(request));
 	    request.getRequestDispatcher("/feedback.jsp").forward(request, response);    
@@ -74,19 +79,22 @@ public class Messages extends HttpServlet {
 		response.addCookie(cookie);
 	}
 	
-	private String getCookie(HttpServletRequest request){	
-	 Cookie[] cookies = request.getCookies();
-	  if(cookies != null) {
-	      for (int i = 0; i < cookies.length; i++) {
-	          Cookie cookie = cookies[i];
-	          if (cookie.getName().equals("name"))
-	          {	
-	        	  return cookie.getValue(); 
-	          }        	
-	       }
-	      return "";
-	   }
-	  return "";
+	private String getCookie(HttpServletRequest request)
+	{	
+		Cookie[] cookies = request.getCookies();
+		if(cookies != null)
+		{
+			for (int i = 0; i < cookies.length; i++)
+			{
+				Cookie cookie = cookies[i];
+				if (cookie.getName().equals("name"))
+				{	
+					return cookie.getValue(); 
+				}        	
+			}
+			return "";
+		}
+		return "";
 	}
 
 }
