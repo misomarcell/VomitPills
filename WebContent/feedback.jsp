@@ -38,12 +38,16 @@
             
             <div class="send-message">
             	<form method="POST">
-                    <span>Name: </span>
-                    <input id="name" type="text" name="name" class="text-input" style="width: 20%;"/><br />
+                    <div style="margin-bottom:5px;">
+                        <div style="width:100px;float:left;">Name: </div>
+                        <input id="name" type="text" name="name" class="text-input" value="${name}" style="width: 200px;"/>
+                   	</div>
                     
-                	<span>Message: </span>
-                	<input id="message" type="text" name="message" class="text-input" style="width: calc(80% - 160px);"/>
-                    <input type="submit" name="submit" value="Send" class="submit-button" style="width:150px"/>
+                    <div style="margin-bottom:5px;">
+                        <div style="width:100px;float:left;">Message: </div>
+                        <input id="message" type="text" name="message" class="text-input" style="width: 540px;"/>
+                   	</div>
+                    <input type="submit" name="submit" value="Send" class="submit-button" style="width:212px;margin-left:100px;"/>
                 </form>
             </div>
             

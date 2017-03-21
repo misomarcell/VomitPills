@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,10 +35,17 @@ public class Messages extends HttpServlet {
 	   		
 		String formedMessages = "";    
 	    
+		if (messages.size() < 1)
+		{
+			formedMessages = "There is no message yet."; 
+		}
+		
 	    for (String message : messages) {
 	    	formedMessages +=  message + "<br />";
 		}
-		request.setAttribute("message", formedMessages);           
+	    
+		request.setAttribute("message", formedMessages);
+		request.setAttribute("name", getCookie(request));
 	    request.getRequestDispatcher("/feedback.jsp").forward(request, response);    
 	}
 
@@ -47,12 +55,38 @@ public class Messages extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String message = request.getParameter("message");    
 		String name = request.getParameter("name"); 
-        System.out.println(name + ": " + message);
         
-        SimpleDateFormat timeStamp = new SimpleDateFormat("MM-dd HH:mm:ss");
-        messages.add("[" + timeStamp.format(new Date()) + "] " + name + ": " + message);
+		if (!message.equals(""))
+		{
+			setCookie(response, name);
+			
+			System.out.println(name + ": " + message);
+	        SimpleDateFormat timeStamp = new SimpleDateFormat("MM-dd HH:mm:ss");
+	        messages.add("[" + timeStamp.format(new Date()) + "] " + name + ": " + message);
+		}
         
         response.sendRedirect("./feedback");
+	}
+	
+	private void setCookie(HttpServletResponse response, String name)
+	{
+		Cookie cookie = new Cookie("name", name);
+		response.addCookie(cookie);
+	}
+	
+	private String getCookie(HttpServletRequest request){	
+	 Cookie[] cookies = request.getCookies();
+	  if(cookies != null) {
+	      for (int i = 0; i < cookies.length; i++) {
+	          Cookie cookie = cookies[i];
+	          if (cookie.getName().equals("name"))
+	          {	
+	        	  return cookie.getValue(); 
+	          }        	
+	       }
+	      return "";
+	   }
+	  return "";
 	}
 
 }
