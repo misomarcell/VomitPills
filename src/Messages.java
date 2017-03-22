@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 public class Messages extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
-	private List<String> messages = new ArrayList<String>();
+	private List<Message> messages = new ArrayList<Message>();
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -44,8 +44,13 @@ public class Messages extends HttpServlet {
 		
 		
 		//Print previous messages
-	    for (String message : messages) {
-	    	formedMessages +=  message + "<br />";
+		for (Message message : messages) {
+	    	formedMessages += 
+	    			"<div class=\"single-message\">" + 
+	    			message.getSent() +
+	    			"<b>" + message.getAuthor() + "</b>: " +
+	    			message.getContent() +    			
+	    			"</div>";
 		}
 	    
 	    //Set values
@@ -66,8 +71,7 @@ public class Messages extends HttpServlet {
 			setCookie(response, name);
 			
 			System.out.println(name + ": " + message);
-	        SimpleDateFormat timeStamp = new SimpleDateFormat("MM-dd HH:mm:ss");
-	        messages.add("[" + timeStamp.format(new Date()) + "] " + name + ": " + message);
+	        messages.add(new Message(message, name));
 		}
         
         response.sendRedirect("./feedback");
