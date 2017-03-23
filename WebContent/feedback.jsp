@@ -31,7 +31,7 @@
             <center><b>FEEDBACK</b></center>
             
             <!-- MESSAGES: START-->
-            <div class="info-conatiner feedback-container">
+            <div class="info-conatiner feedback-container"> 
             	${message}
             </div>
             <!-- MESSAGES: END-->

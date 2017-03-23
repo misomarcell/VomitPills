@@ -19,6 +19,7 @@ p {
 	margin-top:3px;	
 }
 
+
 .center {
 	width: 60%;
 	margin: auto;
@@ -169,6 +170,11 @@ p {
 	margin-top:50px;
 	text-align:left;
 	display:inline-block;
+}
+
+.feedback-container {
+	max-height: 500px;
+    overflow-y: scroll;
 }
 
 .single-message {

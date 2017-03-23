@@ -43,11 +43,13 @@ public class Messages extends HttpServlet {
 		}
 		
 		
-		//Print previous messages
+		//Print previous messages	
 		for (Message message : messages) {
+			String dateString = "<i class=\"fa fa-clock-o\" title=" + message.getSent() + " style=\"margin-right:5px;\"></i>";
+					
 	    	formedMessages += 
 	    			"<div class=\"single-message\">" + 
-	    			message.getSent() +
+	    			dateString +
 	    			"<b>" + message.getAuthor() + "</b>: " +
 	    			message.getContent() +    			
 	    			"</div>";
@@ -65,12 +67,13 @@ public class Messages extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String message = request.getParameter("message");    
 		String name = request.getParameter("name"); 
-        
+        String address = request.getRemoteAddr();
+		
 		if (!message.equals(""))
 		{
 			setCookie(response, name);
 			
-			System.out.println(name + ": " + message);
+			System.out.println(name + "(" + address + "): " + message);
 	        messages.add(new Message(message, name));
 		}
         
@@ -79,6 +82,7 @@ public class Messages extends HttpServlet {
 	
 	private void setCookie(HttpServletResponse response, String name)
 	{
+		name = name.replace(" ", "-");
 		Cookie cookie = new Cookie("name", name);
 		response.addCookie(cookie);
 	}

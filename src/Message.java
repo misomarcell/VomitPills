@@ -19,8 +19,8 @@ public class Message {
 	}
 
 	public String getSent() {
-		SimpleDateFormat timeStamp = new SimpleDateFormat("MM-dd HH:mm:ss");
-        return "[" + timeStamp.format(sent) + "] ";
+		SimpleDateFormat timeStamp = new SimpleDateFormat("HH:mm:ss");
+        return timeStamp.format(sent);
 	}
 
 	public String getAuthor() {
