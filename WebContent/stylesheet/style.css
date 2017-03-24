@@ -179,7 +179,7 @@ p {
 
 .single-message {
 	background-color:#fff;
-	border-radius:5px;
+	border-radius:15px;
 	padding:5px;
 	margin:5px 0px 5px 0px;
 	color:#444;
@@ -187,6 +187,7 @@ p {
 	border:solid 1px #CCCCCC;
 	display:table;
 }
+
 
 .send-message {
 	margin: 10px;
