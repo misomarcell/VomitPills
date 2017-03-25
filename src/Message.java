@@ -21,7 +21,11 @@ public class Message {
 	}
 
 	public String getContent() {
-		return content;
+		if (content.startsWith("https://www.youtube.com/watch?v=") && content.length() < 50)
+		{
+			return "<br/><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/" + content.replace("https://www.youtube.com/watch?v=", "") + "?rel=0&amp;controls=1&amp;showinfo=0\" frameborder=\"0\"></iframe>";
+		}
+		return content.replace("<", "&lt;");
 	}
 
 	public String getSent() {

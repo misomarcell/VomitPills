@@ -43,7 +43,7 @@ public class Messages extends HttpServlet {
 	    			"<div class=\"single-message\">" + 
 	    			dateString +
 	    			"<b>" + message.getAuthor(adminAddress) + "</b>: " +
-	    			message.getContent().replace("<", "&lt;") +  			
+	    			message.getContent() +  			
 	    			"</div>";
 		}
 	    
