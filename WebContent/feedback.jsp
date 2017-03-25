@@ -40,12 +40,12 @@
             	<form method="POST">
                     <div style="margin-bottom:5px;">
                         <div style="width:100px;float:left;">Name: </div>
-                        <input id="name" type="text" name="name" class="text-input" value="${name}" style="width: 200px;"/>
+                        <input id="name" type="text" name="name" class="text-input" value="${name}" style="width: 200px;" autocomplete="off"/>
                    	</div>
                     
                     <div style="margin-bottom:5px;">
                         <div style="width:100px;float:left;">Message: </div>
-                        <input id="message" type="text" name="message" class="text-input" style="width: 540px;"/>
+                        <input id="message" type="text" name="message" class="text-input" style="width: 540px;" maxlength="100" autocomplete="off"/>
                    	</div>
                     <input type="submit" name="submit" value="Send" class="submit-button" style="width:212px;margin-left:100px;"/>
                 </form>

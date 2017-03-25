@@ -16,6 +16,7 @@ public class Messages extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	private List<Message> messages = new ArrayList<Message>();
+	private String adminAddress;
 	
     public Messages() {
         super();
@@ -41,7 +42,7 @@ public class Messages extends HttpServlet {
 	    	formedMessages += 
 	    			"<div class=\"single-message\">" + 
 	    			dateString +
-	    			"<b>" + message.getAuthor() + "</b>: " +
+	    			"<b>" + message.getAuthor(adminAddress) + "</b>: " +
 	    			message.getContent().replace("<", "&lt;") +  			
 	    			"</div>";
 		}
@@ -56,13 +57,27 @@ public class Messages extends HttpServlet {
 		String message = request.getParameter("message");    
 		String name = request.getParameter("name"); 
         String address = request.getRemoteAddr();
-		
+        
 		if (!message.equals(""))
 		{
 			setCookie(response, name);
+		
+			if (messages.size() == 0 && message.equals("!admin"))
+			{
+				adminAddress = address;
+				System.out.println("Admin: " + address);
+			}
+			
+			if (address.equals(adminAddress))
+			{
+				checkCommands(message);
+			}
 			
 			System.out.println(name + "(" + address + "): " + message);
-	        messages.add(new Message(message, name));
+	        if (!message.startsWith("!"))
+	        {
+	        	messages.add(new Message(message, name, address));
+	        }		
 		}
         
         response.sendRedirect("./feedback");
@@ -91,6 +106,19 @@ public class Messages extends HttpServlet {
 			return "";
 		}
 		return "";
+	}
+	
+	private void checkCommands(String message)
+	{
+		
+		if (message.equals("!clear"))
+		{
+			messages.clear();
+		}
+		else if (message.equals("!spam"))
+		{
+			messages.remove(messages.size() - 1);
+		}
 	}
 
 }
