@@ -15,7 +15,7 @@ public class Subscribe extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
          
         String email = request.getParameter("email");      
-        System.out.println(email);
+        Admin.subscribers.add(email);
         
         PrintWriter writer = response.getWriter();      
         String htmlRespone = "<html><h2>You successfully subscribed to the newsletter! ( " + email + " )</h2>";
